@@ -3,10 +3,10 @@ import {
   LoginDetails,
   SignUpDetails,
   UserDetails
-} from '../src/cognito-redux'
+} from '../../src/cognito-redux'
 
 /**
- * Dummy test
+ * Test that each of the models can be instantiated correctly.
  */
 describe('Model test', () => {
   it('CompleteSignUpDetails can be constructed', () => {
