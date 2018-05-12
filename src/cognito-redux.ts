@@ -1,4 +1,6 @@
-// Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
-// import "core-js/fn/array.find"
-// ...
-export default class DummyClass {}
+export {
+  default as CompleteSignUpDetails
+} from './models/CompleteSignUpDetails'
+export { default as LoginDetails } from './models/LoginDetails'
+export { default as SignUpDetails } from './models/SignUpDetails'
+export { default as UserDetails } from './models/UserDetails'
