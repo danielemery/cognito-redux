@@ -1,11 +1,14 @@
+// tslint:disable:no-expression-statement
 import test from 'ava';
 
 import reducer from './login';
 import { LoginStatus } from './loginState';
 
 test('should return the initial state', t => {
-  t.deepEqual(reducer(undefined, { type: 'INIT' }), {
-    loginStatus: LoginStatus.UNAUTHENTICATED,
-    loginError: undefined
-  });
+  const expected = {
+    loginError: undefined,
+    loginStatus: LoginStatus.UNAUTHENTICATED
+  };
+  const actual = reducer(undefined, { type: 'INIT' });
+  t.deepEqual(actual, expected);
 });

@@ -7,8 +7,8 @@ export type LoginAction = ActionType<typeof login>;
 
 export default (
   state: LoginState = {
-    loginStatus: LoginStatus.UNAUTHENTICATED,
-    loginError: undefined
+    loginError: undefined,
+    loginStatus: LoginStatus.UNAUTHENTICATED
   },
   action: LoginAction
 ) => {
@@ -16,26 +16,26 @@ export default (
     case getType(login.login):
       return {
         ...state,
-        loginStatus: LoginStatus.LOGGING_IN,
-        loginError: undefined
+        loginError: undefined,
+        loginStatus: LoginStatus.LOGGING_IN
       };
     case getType(login.loginSucceeded):
       return {
         ...state,
-        loginStatus: LoginStatus.LOGGED_IN,
-        loginError: undefined
+        loginError: undefined,
+        loginStatus: LoginStatus.LOGGED_IN
       };
     case getType(login.loginFailed):
       return {
         ...state,
-        loginStatus: LoginStatus.UNAUTHENTICATED,
-        loginError: action.payload.error
+        loginError: action.payload.error,
+        loginStatus: LoginStatus.UNAUTHENTICATED
       };
     case getType(login.loginRestored):
       return {
         ...state,
-        loginStatus: LoginStatus.LOGGED_IN,
-        loginError: undefined
+        loginError: undefined,
+        loginStatus: LoginStatus.LOGGED_IN
       };
     case getType(login.logout):
       return {
@@ -45,14 +45,14 @@ export default (
     case getType(login.logoutSucceeded):
       return {
         ...state,
-        loginStatus: LoginStatus.UNAUTHENTICATED,
-        loginError: ''
+        loginError: '',
+        loginStatus: LoginStatus.UNAUTHENTICATED
       };
     case getType(login.logoutFailed):
       return {
         ...state,
-        loginStatus: LoginStatus.LOGGED_IN,
-        loginError: action.payload.error
+        loginError: action.payload.error,
+        loginStatus: LoginStatus.LOGGED_IN
       };
     default:
       return state;

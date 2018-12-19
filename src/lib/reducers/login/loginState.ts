@@ -6,6 +6,6 @@ export enum LoginStatus {
 }
 
 export interface LoginState {
-  loginStatus: LoginStatus;
-  loginError: string | undefined;
+  readonly loginStatus: LoginStatus;
+  readonly loginError: string | undefined;
 }
