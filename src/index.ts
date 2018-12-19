@@ -1,1 +1,1 @@
-export * from './lib/number';
+export { default as Reducer } from './lib/rootReducer';

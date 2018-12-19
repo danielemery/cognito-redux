@@ -51,6 +51,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "redux": "^4.0.1",
     "typesafe-actions": "^2.0.4"
   },
   "devDependencies": {
