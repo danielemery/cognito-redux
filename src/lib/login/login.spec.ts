@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
 
-import reducer from './login';
+import reducer, { LoginStatus } from './login';
 import {
   login,
   loginFailed,
@@ -11,7 +11,6 @@ import {
   logoutFailed,
   logoutSucceeded
 } from './loginActions';
-import { LoginStatus } from './loginState';
 
 test('should return the initial state', t => {
   const expected = {

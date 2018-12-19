@@ -1,7 +1,7 @@
 import { createStandardAction } from 'typesafe-actions';
 
-import LoginDetails from '../../models/login-details';
-import UserDetails from '../../models/user-details';
+import LoginDetails from '../models/login-details';
+import UserDetails from '../models/user-details';
 
 export const login = createStandardAction('LOGIN')<LoginDetails>();
 export const loginSucceeded = createStandardAction('LOGIN_SUCCEEDED')<

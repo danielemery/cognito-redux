@@ -1,9 +1,20 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import * as login from './loginActions';
-import { LoginState, LoginStatus } from './loginState';
+import * as actions from './loginActions';
 
-export type LoginAction = ActionType<typeof login>;
+export type LoginAction = ActionType<typeof actions>;
+
+export enum LoginStatus {
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
+  LOGGING_IN = 'LOGGING_IN',
+  LOGGED_IN = 'LOGGED_IN',
+  LOGGING_OUT = 'LOGOUT_LOADING'
+}
+
+export interface LoginState {
+  readonly loginStatus: LoginStatus;
+  readonly loginError: string | undefined;
+}
 
 export default (
   state: LoginState = {
@@ -13,42 +24,42 @@ export default (
   action: LoginAction
 ) => {
   switch (action.type) {
-    case getType(login.login):
+    case getType(actions.login):
       return {
         ...state,
         loginError: undefined,
         loginStatus: LoginStatus.LOGGING_IN
       };
-    case getType(login.loginSucceeded):
+    case getType(actions.loginSucceeded):
       return {
         ...state,
         loginError: undefined,
         loginStatus: LoginStatus.LOGGED_IN
       };
-    case getType(login.loginFailed):
+    case getType(actions.loginFailed):
       return {
         ...state,
         loginError: action.payload.error,
         loginStatus: LoginStatus.UNAUTHENTICATED
       };
-    case getType(login.loginRestored):
+    case getType(actions.loginRestored):
       return {
         ...state,
         loginError: undefined,
         loginStatus: LoginStatus.LOGGED_IN
       };
-    case getType(login.logout):
+    case getType(actions.logout):
       return {
         ...state,
         loginStatus: LoginStatus.LOGGING_OUT
       };
-    case getType(login.logoutSucceeded):
+    case getType(actions.logoutSucceeded):
       return {
         ...state,
         loginError: undefined,
         loginStatus: LoginStatus.UNAUTHENTICATED
       };
-    case getType(login.logoutFailed):
+    case getType(actions.logoutFailed):
       return {
         ...state,
         loginError: action.payload.error,
