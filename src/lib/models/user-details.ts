@@ -9,5 +9,5 @@ export default interface UserDetails {
   /** The email address of the user. */
   readonly EmailAddress: string;
   /** The cognito groups the user belongs to. */
-  readonly Groups: [string];
+  readonly Groups: ReadonlyArray<string>;
 }

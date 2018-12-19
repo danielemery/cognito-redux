@@ -1,6 +1,6 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import * as login from '../../actions/login';
+import * as login from './loginActions';
 import { LoginState, LoginStatus } from './loginState';
 
 export type LoginAction = ActionType<typeof login>;
@@ -45,7 +45,7 @@ export default (
     case getType(login.logoutSucceeded):
       return {
         ...state,
-        loginError: '',
+        loginError: undefined,
         loginStatus: LoginStatus.UNAUTHENTICATED
       };
     case getType(login.logoutFailed):
