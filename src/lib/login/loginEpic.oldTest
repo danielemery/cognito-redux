@@ -1,0 +1,47 @@
+// tslint:disable:no-expression-statement
+import test from 'ava';
+
+// tslint:disable:no-submodule-imports
+import { RunHelpers } from 'rxjs/internal/testing/TestScheduler';
+import { TestScheduler } from 'rxjs/testing';
+// tslint:enable:no-submodule-imports
+
+import UserDetails from '../models/user-details';
+
+import * as loginActions from './loginActions';
+import loginEpic from './loginEpic';
+
+test('valid login action should cause loginSucceeded side effect', t => {
+  const testScheduler = new TestScheduler((actual, expected) => {
+    t.deepEqual(actual, expected);
+  });
+
+  testScheduler.run((helpers: RunHelpers) => {
+    const { hot, expectObservable } = helpers;
+
+    const groups: ReadonlyArray<string> = [];
+    const userDetails: UserDetails = {
+      EmailAddress: 'danielremery@gmail.com',
+      FirstName: 'Daniel',
+      Groups: groups,
+      LastName: 'Emery'
+    };
+
+    const action$ = hot('-a', {
+      a: loginActions.login({
+        EmailAddress: 'danielremery@gmail.com',
+        Password: 'verySecure'
+      })
+    });
+    const state$ = null;
+    const dependencies = {
+      login: () => new Promise<UserDetails>(resolve => resolve(userDetails))
+    };
+
+    const output$ = loginEpic(action$, state$, dependencies);
+
+    expectObservable(output$).toBe('---a', {
+      a: loginActions.loginSucceeded(userDetails)
+    });
+  });
+});
