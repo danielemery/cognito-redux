@@ -19,7 +19,7 @@ const loginEpic: Epic<RootAction, RootAction, RootState, RootServices> = (
     mergeMap(action =>
       from(login(action.payload)).pipe(
         map(userDetails => loginActions.loginSucceeded(userDetails)),
-        catchError(e => of(loginActions.loginFailed({ error: e })))
+        catchError(e => of(loginActions.loginFailed({ error: e.message })))
       )
     )
   );
