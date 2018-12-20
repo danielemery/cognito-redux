@@ -5,16 +5,18 @@ import loginReducer, { LoginAction, LoginState } from './login/login';
 import LoginEpic from './login/loginEpic';
 import LoginService from './login/loginService';
 
-export default combineReducers({
+export const authReducer = combineReducers({
   login: loginReducer
 });
 
-export const rootEpic = combineEpics(LoginEpic);
+export const authEpic = combineEpics(LoginEpic);
 
 export type RootAction = LoginAction;
 
 export type RootServices = LoginService;
 
 export interface RootState {
-  readonly login: LoginState;
+  readonly auth: {
+    readonly login: LoginState;
+  };
 }
