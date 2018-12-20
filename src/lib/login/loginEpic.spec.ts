@@ -13,11 +13,27 @@ import loginEpic from './loginEpic';
 
 test('valid login action should cause loginSucceeded side effect', t => {
   const testScheduler = new TestScheduler((actual, expected) => {
-    t.deepEqual(actual, expected);
+    t.deepEqual(
+      actual,
+      expected,
+      `
+
+    Actual:
+    ${JSON.stringify(actual, null, 2)
+      .split('\n')
+      .join('\n    ')}
+
+    Expected:
+    ${JSON.stringify(expected, null, 2)
+      .split('\n')
+      .join('\n    ')}
+
+  `
+    );
   });
 
   testScheduler.run((helpers: RunHelpers) => {
-    const { hot, expectObservable } = helpers;
+    const { expectObservable, hot } = helpers;
 
     const groups: ReadonlyArray<string> = [];
     const userDetails: UserDetails = {
@@ -33,12 +49,12 @@ test('valid login action should cause loginSucceeded side effect', t => {
         Password: 'verySecure'
       })
     });
-    const state$ = null;
+    const state$ = {};
     const dependencies = {
       login: () => new Promise<UserDetails>(resolve => resolve(userDetails))
     };
 
-    const output$ = loginEpic(action$, state$, dependencies);
+    const output$ = loginEpic(action$ as any, state$ as any, dependencies);
 
     expectObservable(output$).toBe('---a', {
       a: loginActions.loginSucceeded(userDetails)

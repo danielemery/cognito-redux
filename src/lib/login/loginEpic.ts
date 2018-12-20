@@ -11,7 +11,7 @@ import * as loginActions from './loginActions';
 
 const loginEpic: Epic<RootAction, RootAction, RootState, RootServices> = (
   action$,
-  state,
+  {},
   { login }
 ) =>
   action$.pipe(
